@@ -24,7 +24,6 @@ class DataService {
       columnMetadata
     };
     return this.$http({method: 'POST', url, headers: {'Content-Type': 'text/plain'}, data});
-      // .post(url, data, config);
   }
 }
 
