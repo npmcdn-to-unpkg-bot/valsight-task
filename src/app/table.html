@@ -1,0 +1,12 @@
+<div class="table-container">
+  <hot-table ng-if="$ctrl.data.length" settings="{colHeaders: $ctrl.colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: $ctrl.afterChange}"
+             row-headers="false"
+             min-spare-rows="minSpareRows"
+             datarows="$ctrl.data"
+             height="auto"
+             width="auto">
+  </hot-table>
+  <div class="loading" ng-if="data.length">
+    Fetching data...
+  </div>
+</div>
