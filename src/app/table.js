@@ -29,9 +29,14 @@ class TableController {
     // this.hot = new Handsontable(container, settings); // eslint-disable-line no-undef
   }
 
-  afterChange(row, index) {
+  afterChange(row) {
+    const self = this;
     if (row) {
-      console.log(row, index);
+      self.dataService
+        .putDataTables(51, this.data, this.columnMetadata)
+        .then(response => {
+          console.log(response);
+        });
     }
   }
 }

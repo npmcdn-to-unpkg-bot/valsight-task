@@ -1,11 +1,14 @@
 <div class="table-container">
-  <hot-table ng-if="$ctrl.data.length" settings="{colHeaders: $ctrl.colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: $ctrl.afterChange}"
-             row-headers="false"
-             min-spare-rows="minSpareRows"
-             datarows="$ctrl.data"
-             height="auto"
-             width="auto">
-  </hot-table>
+  <div ng-if="$ctrl.data.length">
+    <hot-table settings="$ctrl.settings"
+               row-headers="false"
+               min-spare-rows="minSpareRows"
+               datarows="$ctrl.data">
+    </hot-table>
+    <!-- <div class="show-more">
+      <button ng-click="$ctrl.showMore()">Show more</button>
+    </div> -->
+  </div>
   <div class="loading" ng-if="data.length">
     Fetching data...
   </div>
