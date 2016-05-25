@@ -1,0 +1,10 @@
+<div class="table-list">
+  <ul>
+    <li ng-repeat="table in $ctrl.tables">
+      <div>
+        {{table.name}}
+        <button ng-link="['Table', {id: table.id}]">Select</button>
+      </div>
+    </li>
+  </ul>
+</div>

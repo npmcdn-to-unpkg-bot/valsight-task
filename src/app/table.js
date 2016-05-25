@@ -1,32 +1,23 @@
 class TableController {
   constructor(dataService) {
-    dataService
-      .getDataTables(51)
+    this.dataService = dataService;
+  }
+
+  $routerOnActivate(next) {
+    const id = next.params.id;
+    const self = this;
+    self.dataService
+      .getDataTable(id)
       .then(response => {
-        this.colHeaders = response.data.columnMetadata.map(column => column.name);
-        this.data = response.data.rowData;
+        self.settings = {
+          colHeaders: response.data.columnMetadata.map(column => column.name),
+          contextMenu: ['row_above', 'row_below', 'remove_row'],
+          afterChange: self.afterChange.bind(self)
+        };
+        self.columnMetadata = response.data.columnMetadata;
+        self.colHeaders = response.data.columnMetadata.map(column => column.name);
+        self.data = response.data.rowData;
       });
-    // $http({
-    //   method: 'POST',
-    //   url,
-    //   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //   transformRequest: obj => {
-    //     const str = [];
-    //     for (const p in obj) {
-    //       str.push(`${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`);
-    //       return str.join('&');
-    //     }
-    //   },
-    //   data: {username: 'admin', password: 'admin'}
-    // }).success(response => {
-    //   console.log(response);
-    // });
-    // const container = document.getElementById('table');
-    // const settings = {
-    //   data,
-    //   colHeaders
-    // };
-    // this.hot = new Handsontable(container, settings); // eslint-disable-line no-undef
   }
 
   afterChange(row) {
