@@ -1,10 +1,15 @@
-<div class="table-list">
-  <ul>
-    <li ng-repeat="table in $ctrl.tables">
-      <div>
-        {{table.name}}
-        <button ng-link="['Table', {id: table.id}]">Select</button>
-      </div>
-    </li>
-  </ul>
+<div class="table-list" layout="column">
+  <md-toolbar>
+  </md-toolbar>
+  <md-content flex>
+    <md-list>
+      <md-subheader class="md-no-sticky">List of tables</md-subheader>
+      <md-list-item class="secondary-button-padding" ng-repeat="table in $ctrl.tables">
+        <p class="table-name">{{table.name.replace('_', ' ')}}</p>
+        <md-button class="md-primary md-raised" ng-link="['Table', {id: table.id}]">Select</md-button>
+      </md-list-item>
+    </md-list>
+  </md-content>
 </div>
+
+

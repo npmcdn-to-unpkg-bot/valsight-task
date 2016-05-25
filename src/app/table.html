@@ -1,15 +1,32 @@
-<div class="table-container">
-  <div ng-if="$ctrl.data.length">
-    <hot-table settings="$ctrl.settings"
-               row-headers="false"
-               min-spare-rows="minSpareRows"
-               datarows="$ctrl.data">
-    </hot-table>
-    <!-- <div class="show-more">
-      <button ng-click="$ctrl.showMore()">Show more</button>
-    </div> -->
-  </div>
-  <div class="loading" ng-if="data.length">
-    Fetching data...
-  </div>
+<div class="table-container" layout="column">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      {{$ctrl.isActive('List')}}
+      <md-button class="md-raised md-warn" ng-link="['List']">Back</md-button>
+      <p ng-if="$ctrl.updatingTable">Updating table....</p>
+      <p class="sucess" ng-if="$ctrl.updated">Updated successfully !</p>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-fill layout-padding>
+    <div ng-if="$ctrl.data.length">
+      <hot-table ng-if="$ctrl.updatingTable" settings="$ctrl.settings"
+                read-only
+                row-headers="true"
+                datarows="$ctrl.data"
+                stretchH= "all"
+                height="400"
+                width="auto">
+      </hot-table>
+      <hot-table ng-if="!$ctrl.updatingTable" settings="$ctrl.settings"
+                row-headers="true"
+                datarows="$ctrl.data"
+                stretchH= "all"
+                height="400"
+                width="auto">
+      </hot-table>
+    </div>
+    <div class="loading" ng-if="!$ctrl.data.length">
+      <p>Fetching data...</p>
+    </div>
+  </md-content>
 </div>

@@ -8,10 +8,6 @@ class ListController {
         this.tables = response.data;
       });
   }
-
-  loadTable(id) {
-    
-  }
 }
 
 angular

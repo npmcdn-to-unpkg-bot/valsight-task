@@ -1,13 +1,16 @@
 class TableController {
-  constructor(dataService) {
+  constructor(dataService, $timeout) {
+    this.$timeout = $timeout;
     this.dataService = dataService;
+    this.updatingTable = false;
+    this.updated = false;
   }
 
   $routerOnActivate(next) {
-    const id = next.params.id;
+    this.id = next.params.id;
     const self = this;
     self.dataService
-      .getDataTable(id)
+      .getDataTable(self.id)
       .then(response => {
         self.settings = {
           colHeaders: response.data.columnMetadata.map(column => column.name),
@@ -23,10 +26,15 @@ class TableController {
   afterChange(row) {
     const self = this;
     if (row) {
+      self.updatingTable = true;
       self.dataService
-        .putDataTables(51, this.data, this.columnMetadata)
-        .then(response => {
-          console.log(response);
+        .putDataTables(self.id, this.data, this.columnMetadata)
+        .then(() => {
+          self.updatingTable = false;
+          self.updated = true;
+          self.$timeout(() => {
+            self.updated = false;
+          }, 1500);
         });
     }
   }
