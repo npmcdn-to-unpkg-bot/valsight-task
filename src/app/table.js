@@ -20,6 +20,8 @@ class TableController {
         self.columnMetadata = response.data.columnMetadata;
         self.colHeaders = response.data.columnMetadata.map(column => column.name);
         self.data = response.data.rowData;
+      }, () => {
+        $window.location.href = `${API_URL}login`;
       });
   }
 
@@ -35,6 +37,8 @@ class TableController {
           self.$timeout(() => {
             self.updated = false;
           }, 1500);
+        }, () => {
+          $window.location.href = `${API_URL}login`;
         });
     }
   }
