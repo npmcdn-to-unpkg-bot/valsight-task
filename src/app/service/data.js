@@ -1,6 +1,5 @@
 class DataService {
   constructor($http) {
-    this.dataSource = EXTERNAL_DATA_SRC;
     this.$http = $http;
   }
 
